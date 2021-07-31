@@ -13,10 +13,13 @@
     <header class="sticky-top bg-white">
         <div class="container-fluid">
             <div class="row justify-content-between">
-                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-3">
+                <div class="col-lg-3 col-md-4 col-sm-5 d-none d-sm-block">
                     <a href="./index.html" class="w-5"><img src="./assets/tgiflogo.jpg" class="img-fluid" alt="Congress logo"></a>
-                </div>   
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-10 text-end p-3">
+                </div>
+                <div class="col-sm-5 col-xs-3 d-block d-sm-none">
+                    <a href="./index.html" class="w-5"><img src="./assets/logoxs.jpg" class="img-fluid" alt="Congress logo"></a>
+                </div> 
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-10 text-end p-sm-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
                     </svg>
@@ -24,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-sm navbar-light bg-light border m-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border m-3 shadow rounded">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,21 +39,21 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">congress 113</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="./house.html">house</a></li>
                                 <li><a class="dropdown-item" href="./senate.html">Senate</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Attendance</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item active" href="#">house</a></li>
                                 <li><a class="dropdown-item" href="./attsenate.html">Senate</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Party Loyalty</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="./loyaltyhouse.html">house</a></li>
                                 <li><a class="dropdown-item" href="./loyaltysenate.html">Senate</a></li>
                             </ul>
@@ -63,12 +66,12 @@
     <main class="flex-grow-1">
         <div class="container-fluid">
             <div class="row justify-content-around">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <h1>Attendance</h1>
                     <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.</p>
                     <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <h3 class="text-end">House at a glance</h3>
                     <table class="table table-striped">
                         <thead>
@@ -95,9 +98,9 @@
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-around align-items-center border-top border-3 pt-3 me-3 ms-3">
+            <div class="row justify-content-around border-top border-3 pt-3 me-3 ms-3">
                 <div class="col-md-5">
-                    <h3>Least Engaged (Bottom 10% Attendance)</h3>
+                    <h4>Least Engaged (Bottom 10% Attendance)</h4>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -106,11 +109,21 @@
                                 <th scope="col">% Missed</th>
                             </tr>
                         </thead>
-                        <tbody id="tbodyLeastAtt"></tbody>
+                        <tbody id="tbodyLeastAtt">
+                            <tr>
+                                <td colspan=5>
+                                    <div class="text-center">
+                                        <div class="spinner-border" role="status">
+                                          <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="col-md-5">
-                    <h3>Most Engaged (Top 10% Attendance)</h3>
+                    <h4>Most Engaged (Top 10% Attendance)</h4>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -119,7 +132,17 @@
                                 <th scope="col">% Missed</th>
                             </tr>
                         </thead>
-                        <tbody id="tbodyMostAtt"></tbody>
+                        <tbody id="tbodyMostAtt">
+                            <tr>
+                                <td colspan=5>
+                                    <div class="text-center">
+                                        <div class="spinner-border" role="status">
+                                          <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>   

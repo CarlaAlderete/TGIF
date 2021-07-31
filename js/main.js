@@ -11,15 +11,15 @@ if(document.title == "TGIF|Home"){
         fetch("https://api.propublica.org/congress/v1/113/"+chamber+"/members.json",init)
         .then(res => res.json())
         .then(json => {
-            newData=[...json.results[0].members]
-            myTGIF()
+            let data=[...json.results[0].members]
+            myTGIF(data)
         })
         .catch(err => console.error(err.message))
     }
 
     document.title.includes("Senate") ? callData("senate") : callData("house")
 
-    function myTGIF(){
+    function myTGIF(newData){
         
         if(document.title =="TGIF|Senate" || document.title =="TGIF|House"){
     
@@ -197,8 +197,9 @@ if(document.title == "TGIF|Home"){
             trTotal.appendChild(totalNull)
         
             function addTables(members,vot,votPct,father){
+                let tbody = document.getElementById(father)
+                tbody.innerHTML=""
                 members.forEach(member=>{
-                    let tbody = document.getElementById(father)
                     let tr = document.createElement("tr")
                     tr.innerHTML= `<td>${member.first_name} ${member.middle_name ||""} ${member.last_name}</td>
                     <td>${vot === "missed_votes" ? member[vot] : votWParty(member)}</td>

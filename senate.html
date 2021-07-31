@@ -13,10 +13,13 @@
     <header class="sticky-top bg-white">
         <div class="container-fluid">
             <div class="row justify-content-between">
-                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-3">
+                <div class="col-lg-3 col-md-4 col-sm-5 d-none d-sm-block">
                     <a href="./index.html" class="w-5"><img src="./assets/tgiflogo.jpg" class="img-fluid" alt="Congress logo"></a>
-                </div>   
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-10 text-end p-3">
+                </div>
+                <div class="col-sm-5 col-xs-3 d-block d-sm-none">
+                    <a href="./index.html" class="w-5"><img src="./assets/logoxs.jpg" class="img-fluid" alt="Congress logo"></a>
+                </div> 
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-10 text-end p-sm-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
                     </svg>
@@ -24,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-sm navbar-light bg-light border m-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border m-3 shadow rounded">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,21 +39,21 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">congress 113</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="./house.html">house</a></li>
                                 <li><a class="dropdown-item active" href="#">Senate</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Attendance</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="./atthouse.html">house</a></li>
                                 <li><a class="dropdown-item" href="./attsenate.html">Senate</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Party Loyalty</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="./loyaltyhouse.html">house</a></li>
                                 <li><a class="dropdown-item" href="./loyaltyhouse.html">Senate</a></li>
                             </ul>
@@ -110,6 +113,15 @@
                         </tr>
                     </thead>
                     <tbody id="tbodySenate">
+                        <tr>
+                            <td colspan=5>
+                                <div class="text-center">
+                                    <div class="spinner-border" role="status">
+                                      <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
