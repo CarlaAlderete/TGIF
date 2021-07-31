@@ -1,12 +1,6 @@
 if(document.title == "TGIF|Home"){
     let read=document.getElementById("read")
-    read.addEventListener("click", (e)=>{
-        if(read.textContent == "Read more"){
-        read.innerHTML="Read less"
-        }else{
-        read.innerHTML="Read more"
-        }
-    }) 
+    read.addEventListener("click",() => read.textContent == "Read more" ? read.innerHTML="Read less" : read.innerHTML="Read more") 
 }else{
     let init={
         headers:{
@@ -23,23 +17,15 @@ if(document.title == "TGIF|Home"){
         .catch(err => console.error(err.message))
     }
 
-    if (document.title == "TGIF|Senate" || document.title =="TGIF|Attendance Senate" || document.title == "TGIF|Loyalty Senate"){
-        callData("senate")
-    }else{
-        callData("house")
-    }
+    document.title.includes("Senate") ? callData("senate") : callData("house")
+
     function myTGIF(){
         
         if(document.title =="TGIF|Senate" || document.title =="TGIF|House"){
     
-            if(document.getElementById("tbodySenate")){
-                var fatherTbody = document.getElementById("tbodySenate")
-                var fatherSelect = document.getElementById("selectSenate")
-                
-            }else{
-                var fatherTbody = document.getElementById("tbodyHouse")
-                var fatherSelect = document.getElementById("selectHouse")
-            }
+            var fatherTbody = document.getElementById("tbodySenate") ? document.getElementById("tbodySenate") : document.getElementById("tbodyHouse")
+            var fatherSelect = document.getElementById("selectSenate") ? document.getElementById("selectSenate") : document.getElementById("selectHouse")
+
             let filteresState = "all"
             let filteresParty = ["r","d","ind"]
             let showMemberes=[]
@@ -47,11 +33,7 @@ if(document.title == "TGIF|Home"){
             let newStates=[]
         
             function readFilters(){
-                if(filteresState == "all"){
-                    showMemberes=newData
-                }else{
-                    showMemberes=newData.filter(member => member.state==filteresState)
-                }
+                filteresState == "all" ? showMemberes=newData : showMemberes=newData.filter(member => member.state==filteresState)
                 newShowMemberes=[]
                 showMemberes.forEach(member =>{
                     if(member.party == "R" && filteresParty.includes("r")){
@@ -98,8 +80,7 @@ if(document.title == "TGIF|Home"){
                     tdNull.setAttribute("colspan","5")
                     tdNull.classList.add("text-center")
                     tr.appendChild(tdNull)
-                    father.appendChild(tr)
-                    
+                    father.appendChild(tr) 
                 }
             }
 
@@ -217,41 +198,20 @@ if(document.title == "TGIF|Home"){
         
             function addTables(members,vot,votPct,father){
                 members.forEach(member=>{
-                    let tr=document.createElement("tr")
-                    let tdName=document.createElement("td")
-                    tdName.innerText=`${member.first_name} ${member.middle_name ||""} ${member.last_name}`
-                    tr.appendChild(tdName)
-                    let trDMissedVot=document.createElement("td")
-                    trDMissedVot.innerText= vot === "missed_votes" ? member[vot] : votWParty(member)
-                    tr.appendChild(trDMissedVot)
-                    let tdVot=document.createElement("td")
-                    tdVot.innerText=`${member[votPct].toFixed(2)} %`
-                    tr.appendChild(tdVot)
-                    father.appendChild(tr)
+                    let tbody = document.getElementById(father)
+                    let tr = document.createElement("tr")
+                    tr.innerHTML= `<td>${member.first_name} ${member.middle_name ||""} ${member.last_name}</td>
+                    <td>${vot === "missed_votes" ? member[vot] : votWParty(member)}</td>
+                    <td>${member[votPct].toFixed(2)}%</td>`
+                    tbody.appendChild(tr)
                 })
             }
+
+            let votWParty = (member) => Math.round(member.total_votes - member.missed_votes * member.votes_with_party_pct/100)
+
+            document.getElementById("trDMissed") ? (addElementsTable1(statistics.democrats,"PromMissedVotes",trDMissed), addElementsTable1(statistics.republicans,"PromMissedVotes",trRMissed), addElementsTable1(statistics.independents,"PromMissedVotes",trIMissed)) : (addElementsTable1(statistics.democrats,"PromPctVotesParty",trDWith), addElementsTable1(statistics.republicans,"PromPctVotesParty",trRWith), addElementsTable1(statistics.independents,"PromPctVotesParty",trIWith))
         
-            function votWParty(member){
-                return Math.round(member.total_votes - member.missed_votes * member.votes_with_party_pct/100)
-            }
-        
-            if(document.getElementById("trDMissed")){
-                addElementsTable1(statistics.democrats,"PromMissedVotes",trDMissed)
-                addElementsTable1(statistics.republicans,"PromMissedVotes",trRMissed)
-                addElementsTable1(statistics.independents,"PromMissedVotes",trIMissed)
-            }else{
-                addElementsTable1(statistics.democrats,"PromPctVotesParty",trDWith)
-                addElementsTable1(statistics.republicans,"PromPctVotesParty",trRWith)
-                addElementsTable1(statistics.independents,"PromPctVotesParty",trIWith)
-            }
-        
-            if(document.getElementById("tbodyLeastAtt")){
-                addTables(statistics.engaged.most,"missed_votes","missed_votes_pct",tbodyMostAtt)
-                addTables(statistics.engaged.least,"missed_votes","missed_votes_pct",tbodyLeastAtt) 
-            }else{
-                addTables(statistics.loyal.least,"","votes_with_party_pct",tbodyLeastLoyal)
-                addTables(statistics.loyal.most,"","votes_with_party_pct",tbodyMostLoyal)
-            }
+            document.getElementById("tbodyLeastAtt") ? (addTables(statistics.engaged.most,"missed_votes","missed_votes_pct","tbodyMostAtt"), addTables(statistics.engaged.least,"missed_votes","missed_votes_pct","tbodyLeastAtt")) : (addTables(statistics.loyal.least,"","votes_with_party_pct","tbodyLeastLoyal"), addTables(statistics.loyal.most,"","votes_with_party_pct","tbodyMostLoyal"))
            }
     }
 }
