@@ -52,7 +52,7 @@ if(document.title == "TGIF|Home"){
                 if(members.length !==0){
                     members.forEach(member =>{
                         let tr=document.createElement("tr")
-                        tr.innerHTML=`<td><a href="${member.url}" target="_blank">${member.first_name} ${member.middle_name ||""} ${member.last_name}</a></td>
+                        tr.innerHTML=`<td><a href="${member.url}" target="_blank">${member.last_name} ${member.first_name} ${member.middle_name ||""}</a></td>
                         <td class="text-center">${member.party}</td>
                         <td class="text-center">${member.state}</td>
                         <td class="text-center">${member.seniority}</td>
@@ -191,14 +191,14 @@ if(document.title == "TGIF|Home"){
                 tbody.innerHTML=""
                 members.forEach(member=>{
                     let tr = document.createElement("tr")
-                    tr.innerHTML= `<td><a href="${member.url}" target="_blank">${member.first_name} ${member.middle_name ||""} ${member.last_name}</a></td>
+                    tr.innerHTML= `<td><a href="${member.url}" target="_blank">${member.last_name} ${member.first_name} ${member.middle_name ||""}</a></td>
                     <td class="text-center">${vot === "missed_votes" ? member[vot] : votWParty(member)}</td>
                     <td class="text-center">${member[votPct].toFixed(2)}%</td>`
                     tbody.appendChild(tr)
                 })
             }
 
-            let votWParty = (member) => Math.round(member.total_votes - member.missed_votes * member.votes_with_party_pct/100)
+            let votWParty = (member) => Math.round((member.total_votes - member.missed_votes) * member.votes_with_party_pct/100)
 
             document.getElementById("trDMissed") ? (addElementsTable1(statistics.democrats,"PromMissedVotes",trDMissed), addElementsTable1(statistics.republicans,"PromMissedVotes",trRMissed), addElementsTable1(statistics.independents,"PromMissedVotes",trIMissed)) : (addElementsTable1(statistics.democrats,"PromPctVotesParty",trDWith), addElementsTable1(statistics.republicans,"PromPctVotesParty",trRWith), addElementsTable1(statistics.independents,"PromPctVotesParty",trIWith))
         
