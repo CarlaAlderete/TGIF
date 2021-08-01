@@ -135,7 +135,7 @@ if(document.title == "TGIF|Home"){
                     least:[]
                 }
             }
-            
+            console.log(statistics)
             let democrats=newData.filter(member => member.party == "D")
             let republicans=newData.filter(member => member.party == "R")
             let independents=newData.filter(member => member.party == "ID")
