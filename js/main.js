@@ -173,7 +173,7 @@ if(document.title == "TGIF|Home"){
                 father.appendChild(tdCant)
                 let tdProm=document.createElement("td")
                 tdProm.classList.add("text-center")
-                tdProm.innerText= member[prom] === "-" ? "-" : `${member[prom].toFixed(2)} %`
+                tdProm.innerText= member[prom] === "-" || member === statistics.independents ? "-" : `${member[prom].toFixed(2)} %`
                 father.appendChild(tdProm)
             }
         
