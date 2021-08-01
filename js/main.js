@@ -135,7 +135,7 @@ if(document.title == "TGIF|Home"){
                     least:[]
                 }
             }
-            console.log(statistics)
+            
             let democrats=newData.filter(member => member.party == "D")
             let republicans=newData.filter(member => member.party == "R")
             let independents=newData.filter(member => member.party == "ID")
@@ -153,7 +153,6 @@ if(document.title == "TGIF|Home"){
             statistics.engaged.least=(order(newMemberes,"missed_votes_pct").slice(order(newMemberes,"missed_votes_pct").length*0.9,order(newMemberes,"missed_votes_pct").length)).reverse()
             statistics.loyal.least=order(newMemberes,"votes_with_party_pct").slice(0,order(newMemberes,"votes_with_party_pct").length*0.1+1)
             statistics.loyal.most=(order(newMemberes,"votes_with_party_pct").slice(order(newMemberes,"votes_with_party_pct").length*0.9,order(newMemberes,"votes_with_party_pct").length)).reverse()
-        
             function average(members,pct){
                 let pctVotesParty=members.reduce((acc, member) => acc + member[pct],0)
                 let promTotal= pctVotesParty !== 0 ? pctVotesParty/members.length : "-"
@@ -173,7 +172,7 @@ if(document.title == "TGIF|Home"){
                 father.appendChild(tdCant)
                 let tdProm=document.createElement("td")
                 tdProm.classList.add("text-center")
-                tdProm.innerText= member[prom] === "-" || member === statistics.independents ? "-" : `${member[prom].toFixed(2)} %`
+                tdProm.innerText= member[prom] === "-" || (member === statistics.independents && prom == "PromPctVotesParty") ? "-" : `${member[prom].toFixed(2)} %`
                 father.appendChild(tdProm)
             }
         
