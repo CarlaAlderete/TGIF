@@ -47,30 +47,16 @@ if(document.title == "TGIF|Home"){
                 addElements(newShowMemberes,fatherTbody)
             }
         
-            function addElements(elements,father){
+            function addElements(members,father){
                 fatherTbody.innerHTML=""
-                if(elements.length !==0){
-                    elements.forEach(element =>{
+                if(members.length !==0){
+                    members.forEach(member =>{
                         let tr=document.createElement("tr")
-                        let tdName=document.createElement("td")
-                        tr.appendChild(tdName)
-                        let a=document.createElement("a")
-                        a.innerText=`${element.first_name} ${element.middle_name ||""} ${element.last_name}`
-                        a.href=element.url
-                        a.setAttribute("target","_bank")
-                        tdName.appendChild(a)
-                        let tdParty=document.createElement("td")
-                        tdParty.innerText=element.party
-                        tr.appendChild(tdParty)
-                        let tdState=document.createElement("td")
-                        tdState.innerText=element.state
-                        tr.appendChild(tdState)
-                        let tdYears=document.createElement("td")
-                        tdYears.innerText=element.seniority
-                        tr.appendChild(tdYears)
-                        let tdVot=document.createElement("td")
-                        tdVot.innerText=`${element.votes_with_party_pct.toFixed(2)} %`
-                        tr.appendChild(tdVot)
+                        tr.innerHTML=`<td><a href="${member.url}" target="_blank">${member.first_name} ${member.middle_name ||""} ${member.last_name}</a></td>
+                        <td class="text-center">${member.party}</td>
+                        <td class="text-center">${member.state}</td>
+                        <td class="text-center">${member.seniority}</td>
+                        <td class="text-center">${member.votes_with_party_pct.toFixed(2)}%</td>`
                         father.appendChild(tr)
                     })
                 }else{
@@ -141,8 +127,8 @@ if(document.title == "TGIF|Home"){
                     PromMissedVotes:0
                 },
                 engaged:{
-                    most:[],
-                    least:[]
+                    most:[],//mas
+                    least:[]//menos
                 },
                 loyal:{
                     most:[],
@@ -163,15 +149,15 @@ if(document.title == "TGIF|Home"){
             statistics.democrats.PromMissedVotes=average(democrats,"missed_votes_pct")
             statistics.republicans.PromMissedVotes=average(republicans,"missed_votes_pct")
             statistics.independents.PromMissedVotes=average(independents,"missed_votes_pct")
-            statistics.engaged.most=order(newMemberes,"missed_votes_pct").slice(0,(order(newMemberes,"missed_votes_pct").length*0.1))
+            statistics.engaged.most=order(newMemberes,"missed_votes_pct").slice(0,(order(newMemberes,"missed_votes_pct").length*0.1+1))
             statistics.engaged.least=(order(newMemberes,"missed_votes_pct").slice(order(newMemberes,"missed_votes_pct").length*0.9,order(newMemberes,"missed_votes_pct").length)).reverse()
-            statistics.loyal.least=order(newMemberes,"votes_with_party_pct").slice(0,order(newMemberes,"votes_with_party_pct").length*0.1)
+            statistics.loyal.least=order(newMemberes,"votes_with_party_pct").slice(0,order(newMemberes,"votes_with_party_pct").length*0.1+1)
             statistics.loyal.most=(order(newMemberes,"votes_with_party_pct").slice(order(newMemberes,"votes_with_party_pct").length*0.9,order(newMemberes,"votes_with_party_pct").length)).reverse()
         
             function average(members,pct){
-                let pctVotesParty=members.reduce((acc, members) => acc + members[pct],0)
-                let promedio=pctVotesParty !== 0 ? pctVotesParty/members.length : "-"
-                return promedio
+                let pctVotesParty=members.reduce((acc, member) => acc + member[pct],0)
+                let promTotal= pctVotesParty !== 0 ? pctVotesParty/members.length : "-"
+                return promTotal
             }
             
             function order(members,pct){
@@ -180,10 +166,13 @@ if(document.title == "TGIF|Home"){
             }
         
             function addElementsTable1(member,prom,father){
+                document.getElementById("preloader").classList.add("d-none")
                 let tdCant=document.createElement("td")
                 tdCant.innerText=member.cant
+                tdCant.classList.add("text-center")
                 father.appendChild(tdCant)
                 let tdProm=document.createElement("td")
+                tdProm.classList.add("text-center")
                 tdProm.innerText= member[prom] === "-" ? "-" : `${member[prom].toFixed(2)} %`
                 father.appendChild(tdProm)
             }
@@ -191,6 +180,8 @@ if(document.title == "TGIF|Home"){
             let trTotal=document.getElementById("trTotal")
             let tdTotal=document.createElement("td")
             let totalNull=document.createElement("td")
+            totalNull.classList.add("text-center")
+            tdTotal.classList.add("text-center")
             totalNull.innerText="-"
             tdTotal.innerText=statistics.democrats.cant + statistics.republicans.cant + statistics.independents.cant
             trTotal.appendChild(tdTotal)
@@ -201,9 +192,9 @@ if(document.title == "TGIF|Home"){
                 tbody.innerHTML=""
                 members.forEach(member=>{
                     let tr = document.createElement("tr")
-                    tr.innerHTML= `<td>${member.first_name} ${member.middle_name ||""} ${member.last_name}</td>
-                    <td>${vot === "missed_votes" ? member[vot] : votWParty(member)}</td>
-                    <td>${member[votPct].toFixed(2)}%</td>`
+                    tr.innerHTML= `<td><a href="${member.url}" target="_blank">${member.first_name} ${member.middle_name ||""} ${member.last_name}</a></td>
+                    <td class="text-center">${vot === "missed_votes" ? member[vot] : votWParty(member)}</td>
+                    <td class="text-center">${member[votPct].toFixed(2)}%</td>`
                     tbody.appendChild(tr)
                 })
             }
